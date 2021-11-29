@@ -19,10 +19,23 @@ temp_dataset = dataset[['age', 'diabetes', 'high_blood_pressure', 'platelets', '
 # Show total number of data rows X columns
 print(dataset.shape)
 
-print(dataset.tail(10))
+# print(dataset.tail(10))
 # print(dataset.describe())
 
 # Drop the garbage data (index 299)
 dataset = dataset.drop(dataset.index[299])
 # dataset.drop(dataset.index[299], inplace=True)
-print(dataset.tail(10))
+# print(dataset.tail())
+
+# Convert ROW-> COLUMN & COLUMN-> ROW
+# print(dataset)
+dataset = dataset.transpose()
+# print(dataset)
+
+# Take a sample of randomly chosen 5 columns, because 300 takes too much memory
+temp_dataset = dataset.sample(5, axis="columns")
+print(temp_dataset)
+
+print(temp_dataset.info())
+
+
