@@ -83,12 +83,12 @@ index = date_array
 df = pd.DataFrame(data=data, index=index)
 
 # Draw a vertical bar chart
-df.plot.bar(stacked=True, rot=15, title="Parvej's Sleeping Data (01-Nov-2021 ~ 10-Nov-2021)")
+df.plot.bar(stacked=True, rot=15, title="Subject-1 Sleeping Data (01-Nov-2021 ~ 10-Nov-2021)")
 
 # plot.xlabel('x')
 # plot.ylabel('y')
 # plot.grid(color='lightgray', linestyle='dashed')
-plot.grid(True, color="gray", linewidth="0.4", linestyle='dashed')
+plot.grid(True, color="gray", linewidth="0.1", linestyle='dashed')
 
 for index, data in enumerate(total_asleep_array):
     plot.text(x=index, y=data + 1, s=f"{data}")

@@ -49,13 +49,14 @@ import matplotlib.pyplot as plot
 
 # A python dictionary
 
-data = {"Jan": jan_total_asleep_array, "Thijs": thijs_total_asleep_array, "Parvej": parvej_total_asleep_array}
+data = {"Subject-1": jan_total_asleep_array, "Subject-2": thijs_total_asleep_array,
+        "Subject-3": parvej_total_asleep_array}
 index = date_array
 
 # Dictionary loaded into a DataFrame
 dataFrame = pd.DataFrame(data=data, index=index)
 
 # Draw a vertical bar chart
-dataFrame.plot.bar(rot=45, title="Total Sleep Duration (Jan vs Thijs vs Parvej)");
-plot.grid(True, color="gray", linewidth="0.4", linestyle='dashed')
-plot.show(block=True);
+dataFrame.plot.bar(rot=30, title="Total Sleep Duration (Subject-1 vs Subject-2 vs Subject-3)")
+plot.grid(True, color="gray", linewidth="0.5", linestyle='dashed')
+plot.show()
