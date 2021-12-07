@@ -1,17 +1,14 @@
 from random import randint
 
 import bokeh
-import pandas as pd
 import numpy as np
-
-from bokeh.io import show, curdoc
-from bokeh.plotting import figure
-
+import pandas as pd
+from bokeh.io import curdoc
+from bokeh.layouts import row
 from bokeh.models import CategoricalColorMapper, HoverTool, ColumnDataSource, Panel
 from bokeh.models.widgets import CheckboxGroup, Slider, RangeSlider, Tabs
-
-from bokeh.layouts import column, row, WidgetBox
 from bokeh.palettes import Category20_16
+from bokeh.plotting import figure
 
 df_parvej = df_thijs = df_jan = pd.DataFrame(
     columns=["Subject", "Start Time", "End Time", "Minutes Asleep", "Minutes Awake", "Number of Awakenings",
@@ -80,14 +77,11 @@ date_array = df_thijs.loc[:, "End Date"].to_numpy()
 # print(df_jan.dtypes)
 # print(df_jan.head())
 
-final_df1 = [df_parvej, df_thijs, df_jan, df_milad, df_maryam]
-final_df = pd.concat(final_df1)
+# final_df1 = [df_parvej, df_thijs, df_jan, df_milad, df_maryam]
+final_df = pd.concat([df_parvej, df_thijs, df_jan, df_milad, df_maryam])
 
 # print(final_df)
 # print(final_df.dtypes)
-
-# Read in data
-# final_df = pd.read_csv('data/complete_data.csv', index_col=0)[['arr_delay', 'carrier', 'name']]
 
 # Available carrier list
 available_subjects = list(final_df['subject_name'].unique())
@@ -194,9 +188,9 @@ def style(p):
 
 # Function to make the plot
 def make_plot(src):
-    print(src)
+    # print(src)
     # Blank plot with correct labels
-    p = figure(plot_width=1500, plot_height=700,
+    p = figure(plot_width=1000, plot_height=500,
                title='Sleeping data by Subject',
                x_axis_label='Date', y_axis_label='Sleeping Duration (min)')
 
@@ -240,24 +234,19 @@ def update(attr, old, new):
 
 
 # print("\nP3:")
-# CheckboxGroup to select carrier to display
 carrier_selection = CheckboxGroup(labels=available_subjects, active=[0, 1])
 carrier_selection.on_change('active', update)
 
-# print(carrier_selection.labels)
-# print(carrier_selection.active)
 # print("\nP4:")
 
 # Slider to select width of bin
 binwidth_select = Slider(start=1, end=10, step=1, value=5, title='Width')
 binwidth_select.on_change('value', update)
 
-# RangeSlider control to select start and end of plotted delays
 # range_select = RangeSlider(start=-60, end=180, value=(-60, 120), step=5, title='Delay Range (min)')
 range_select = RangeSlider(start=1, end=1000, value=(0, 1000), step=10, title='Sleeping Time (min)')
 range_select.on_change('value', update)
 
-# Find the initially selected carrieres
 initial_carriers = [carrier_selection.labels[i] for i in carrier_selection.active]
 
 # print("\nP1:")
@@ -266,6 +255,9 @@ initial_carriers = [carrier_selection.labels[i] for i in carrier_selection.activ
 # src = make_dataset(initial_carriers, range_start=range_select.value[0], range_end=range_select.value[1], bin_width=5)
 src = make_dataset(initial_carriers, range_start=range_select.value[0], range_end=range_select.value[1],
                    bin_width=binwidth_select.value)
+
+print(initial_carriers)
+print(src)
 # print("\nP2:")
 p = make_plot(src)
 

@@ -11,3 +11,6 @@ Parvej Ahmed Chowdhury
 pavej35@gmail.com
 +31 06 22 512 526
 ```
+
+## Licence
+Attributed under the GNU General Public License v3.0
