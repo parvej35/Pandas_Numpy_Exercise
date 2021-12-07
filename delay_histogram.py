@@ -12,7 +12,7 @@ from bokeh.layouts import column, row, WidgetBox
 from bokeh.palettes import Category20_16
 
 # Read in data
-flights = pd.read_csv('data/complete_flights.csv', index_col=0)[['arr_delay', 'carrier', 'name']]
+flights = pd.read_csv('data/complete_data.csv', index_col=0)[['arr_delay', 'carrier', 'name']]
 
 # Available carrier list
 available_carriers = list(flights['name'].unique())
@@ -166,6 +166,6 @@ tabs = Tabs(tabs=[tab])
 # Add it to the current document (displays plot)
 curdoc().add_root(tabs)
 
-show(layout)
+# show(layout)
 
 # https://towardsdatascience.com/data-visualization-with-bokeh-in-python-part-ii-interactions-a4cf994e2512
